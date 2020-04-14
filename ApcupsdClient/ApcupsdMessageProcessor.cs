@@ -39,10 +39,11 @@ namespace ApcupsdLib
                 Version = dict.GetStringOrEmpty("VERSION"),
                 UpsName = dict.GetStringOrEmpty("UPSNAME"),
                 Cable = dict.GetStringOrEmpty("CABLE"),
+                Driver = dict.GetStringOrEmpty("DRIVER"),
                 Model = dict.GetStringOrEmpty("MODEL"),
                 UpsMode = dict.GetStringOrEmpty("UPSMODE"),
                 StartTime = dict.GetDateTime("STARTTIME"),
-                // todo: status
+                // todo: Status = (Status)Enum.Parse(typeof(Status), dict.GetStringOrEmpty("STATUS")), // it is possible to have multiple values for status "ONLINE REPLACEBATT"
                 MasterUpd = dict.GetNullableDateTime("MASTERUPD"),
                 EndApc = dict.GetDateTime("END APC"),
 

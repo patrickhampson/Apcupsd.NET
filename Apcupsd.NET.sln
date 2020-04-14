@@ -1,9 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApcupsdLib", "ApcupsdClient\ApcupsdLib.csproj", "{D0258A8E-BF34-4B38-97BE-E80368362CB5}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdLib", "ApcupsdClient\ApcupsdLib.csproj", "{D0258A8E-BF34-4B38-97BE-E80368362CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApcupsdExample", "ApcupsdExample\ApcupsdExample.csproj", "{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdExample", "ApcupsdExample\ApcupsdExample.csproj", "{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApcupsdLibTests", "ApcupsdLibTests\ApcupsdLibTests.csproj", "{2B9375DE-25B4-4D42-A858-F810EF04A041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,5 +22,15 @@ Global
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {298126C2-119F-491D-9DC0-C1C0EE1311E1}
 	EndGlobalSection
 EndGlobal

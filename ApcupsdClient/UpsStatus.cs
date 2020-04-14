@@ -13,6 +13,7 @@ namespace ApcupsdLib
         public string Version { get; set; }
         public string UpsName { get; set; }
         public string Cable { get; set; }
+        public string Driver { get; set; }
         public string Model { get; set; }
         public string UpsMode { get; set; }
         public DateTime StartTime { get; set; }
