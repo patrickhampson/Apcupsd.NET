@@ -2,11 +2,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdLib", "ApcupsdClient\ApcupsdLib.csproj", "{D0258A8E-BF34-4B38-97BE-E80368362CB5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdExample", "ApcupsdExample\ApcupsdExample.csproj", "{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApcupsdLibTests", "ApcupsdLibTests\ApcupsdLibTests.csproj", "{2B9375DE-25B4-4D42-A858-F810EF04A041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdLibTests", "ApcupsdLibTests\ApcupsdLibTests.csproj", "{2B9375DE-25B4-4D42-A858-F810EF04A041}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApcupsdLib", "ApcupsdLib\ApcupsdLib.csproj", "{20B01D42-D0A9-4B7F-8101-C1165992A1D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{129C2319-D55F-4E11-BCA0-137EE91D6CAA}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D0258A8E-BF34-4B38-97BE-E80368362CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0258A8E-BF34-4B38-97BE-E80368362CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0258A8E-BF34-4B38-97BE-E80368362CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0258A8E-BF34-4B38-97BE-E80368362CB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FAA7A2-5A1A-456B-8916-9A2F9D2B75ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +27,10 @@ Global
 		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B9375DE-25B4-4D42-A858-F810EF04A041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20B01D42-D0A9-4B7F-8101-C1165992A1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B01D42-D0A9-4B7F-8101-C1165992A1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B01D42-D0A9-4B7F-8101-C1165992A1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B01D42-D0A9-4B7F-8101-C1165992A1D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

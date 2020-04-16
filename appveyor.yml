@@ -12,4 +12,4 @@ build:
 after_build:
   dotnet pack /p:PackageVersion=%appveyor_build_version% ApcupsdLib
 artifacts:
-  path: '**\ApcupsdLib.*.nupkg'
+  path: '**\Apcupsd.NET.*.nupkg'

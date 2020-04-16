@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApcupsdClient\ApcupsdLib.csproj" />
+    <ProjectReference Include="..\ApcupsdLib\ApcupsdLib.csproj" />
   </ItemGroup>
 </Project>

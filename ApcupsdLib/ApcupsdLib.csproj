@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>ApcupsdLib.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Apcupsd.NET</PackageId>
+    <Authors>PatrickHampson</Authors>
+    <Company />
+    <Product />
+    <PackageProjectUrl>https://github.com/patrickhampson/Apcupsd.NET</PackageProjectUrl>
+    <Description>A C# implementation of the apcupsd NIS protocol (http://www.apcupsd.org/manual/manual.html#nis-network-server-protocol).</Description>
+    <RepositoryUrl>https://github.com/patrickhampson/Apcupsd.NET</RepositoryUrl>
+    <PackageTags>apc, ups, apcupsd, battery, backup</PackageTags>
+  </PropertyGroup>
+
+</Project>
