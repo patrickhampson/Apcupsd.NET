@@ -6,9 +6,8 @@ platform: Any CPU
 nuget:
   project_feed: true
   disable_publish_on_pr: true
-build:
-  publish_nuget: true
-  verbosity: minimal
+build_script:
+  cmd: dotnet build ./Apcupsd.NET.sln
 after_build:
   dotnet pack /p:PackageVersion=%appveyor_build_version% ApcupsdLib
 artifacts:
