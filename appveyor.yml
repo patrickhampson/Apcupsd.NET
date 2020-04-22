@@ -2,6 +2,15 @@ image: Visual Studio 2019
 before_build:
   nuget restore
 configuration: Release
+version: '1.0.{build}'
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 nuget:
   project_feed: true
   disable_publish_on_pr: true
@@ -11,4 +20,4 @@ build:
 after_build:
   dotnet pack /p:PackageVersion=%appveyor_build_version% ApcupsdLib
 artifacts:
-  path: '**\ApcupsdLib.*.nupkg'
+  path: '**\Apcupsd.NET.*.nupkg'
