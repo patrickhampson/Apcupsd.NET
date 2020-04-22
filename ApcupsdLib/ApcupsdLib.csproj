@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ApcupsdLib.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Apcupsd.NET</PackageId>
     <Authors>PatrickHampson</Authors>
@@ -16,4 +15,7 @@
     <PackageTags>apc, ups, apcupsd, battery, backup</PackageTags>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Objects\" />
+  </ItemGroup>
 </Project>

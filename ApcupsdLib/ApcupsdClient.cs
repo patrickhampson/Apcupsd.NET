@@ -1,67 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using ApcupsdLib.Objects;
 
 namespace ApcupsdLib
 {
     public class ApcupsdClient
     {
         private static readonly byte[] GetStatusMessage = new byte[] { 0x00, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73 };
+        private static readonly byte[] GetEventsMessage = new byte[] { 0x00, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73 };
+        private static readonly byte[] EndBytes = new byte[] { 0x00, 0x00 };
 
         private string host;
         private int port;
         private int readTimeout;
-        private TcpClient client;
         private ApcupsdMessageProcessor messageProcessor;
 
-        public ApcupsdClient(string host, int port, int readTimeout = 30000)
+        public ApcupsdClient(string host, int port, int readTimeout = 1000)
         {
             this.host = host;
             this.port = port;
             this.readTimeout = readTimeout;
-            this.client = new TcpClient();
 
             this.messageProcessor = new ApcupsdMessageProcessor();
         }
 
-        public void Connect()
-        {
-            this.client.Connect(this.host, this.port);
-        }
-
         public UpsStatus GetStatus()
         {
-            if (!this.IsConnected)
-            {
-                throw new Exception("Client is not connected");
-            }
-
-            string str;
-            using (NetworkStream stream = client.GetStream())
-            {
-                byte[] data = new byte[32];
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    stream.ReadTimeout = this.readTimeout;
-                    stream.Write(GetStatusMessage, 0, GetStatusMessage.Length);
-
-                    int numBytesRead;
-                    while ((numBytesRead = stream.Read(data, 0, data.Length)) > 0)
-                    {
-                        ms.Write(data, 0, numBytesRead);
-                    }
-                    str = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
-                }
-            }
-
-            var ret = this.messageProcessor.ParseUpsStatusMessage(str);
+            var arr = this.ExecuteClientAction(GetStatusMessage);
+            var ret = this.messageProcessor.ParseUpsStatusMessage(arr);
             return ret;
         }
 
-        public bool IsConnected => this.client.Connected;
+        public UpsEvent[] GetEvents()
+        {
+            var arr = this.ExecuteClientAction(GetEventsMessage);
+            var ret = this.messageProcessor.ParseUpsEventMessages(arr);
+            return ret;
+        }
+
+        private string[] ExecuteClientAction(byte[] sendMessage)
+        {
+            var ret = new List<string>();
+            using (TcpClient client = new TcpClient())
+            {
+                client.Connect(this.host, this.port);
+                using (NetworkStream stream = client.GetStream())
+                {
+                    stream.Write(sendMessage, 0, sendMessage.Length);
+                    Thread.Sleep(20); // TODO: Properly handle not enough data being in the buffer.
+
+                    var start = new byte[2];
+                    stream.Read(start, 0, 2);
+                    while(!start.SequenceEqual(EndBytes))
+                    {
+                        var line = new byte[start[1]];
+                        stream.Read(line, 0, start[1]);
+                        var lineStr = Encoding.ASCII.GetString(line);
+                        ret.Add(lineStr);
+                        stream.Read(start, 0, 2);
+                    } while (!start.SequenceEqual(EndBytes));
+                }
+            }
+
+            return ret.ToArray();
+        }
     }
 }

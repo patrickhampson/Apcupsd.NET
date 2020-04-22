@@ -18,7 +18,7 @@ namespace ApcupsdLibTests
         {
             var processor = new ApcupsdMessageProcessor();
 
-            var message = File.ReadAllText("TestData/TCPSocket.txt", Encoding.ASCII);
+            var message = File.ReadAllLines("TestData/TCPSocket.txt", Encoding.ASCII);
             var status = processor.ParseUpsStatusMessage(message);
             Assert.AreEqual("001,036,0882",status.Apc);
             Assert.AreEqual(DateTime.Parse("2020-04-14 06:43:03 +0100"), status.Date);

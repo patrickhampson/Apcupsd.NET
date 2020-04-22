@@ -1,9 +1,10 @@
 ﻿using System;
-namespace ApcupsdLib
+namespace ApcupsdLib.Objects
 {
     [Flags]
     public enum Status
     {
+        Unknown,
         Cal,
         Trim,
         Boost,

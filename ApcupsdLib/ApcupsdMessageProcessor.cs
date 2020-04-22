@@ -2,28 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApcupsdLib.Objects;
 
 namespace ApcupsdLib
 {
     public class ApcupsdMessageProcessor
     {
-        private static readonly Regex ExtraCharacters = new Regex(@"\0[^\\]", RegexOptions.Compiled);
-        private static readonly Regex ControlCharacters = new Regex(@"[\p{Cc}-[\r\n]]+", RegexOptions.Compiled);
-
         public ApcupsdMessageProcessor()
         {
         }
 
-        public UpsStatus ParseUpsStatusMessage(string message)
+        public UpsStatus ParseUpsStatusMessage(string[] lines)
         {
-            //var regex = new Regex(@"\0[^\\]");
-            message = ExtraCharacters.Replace(message, string.Empty);
-            message = ControlCharacters.Replace(message, string.Empty); // todo: Collapse into one regex
 
             var dict = new Dictionary<string, string>();
 
-            var lines = message.Split('\n').Select(line => line.Split(new[] { ':' }, 2));
-            foreach (var line in lines)
+            var splitLines = lines.Select(line => line.Split(new[] { ':' }, 2));
+            foreach (var line in splitLines)
             {
                 if (line.Length == 2)
                 {
@@ -79,6 +74,23 @@ namespace ApcupsdLib
             };
 
             return ret;
+        }
+
+        public UpsEvent[] ParseUpsEventMessages(string[] lines)
+        {
+            var events = new List<UpsEvent>();
+            
+            foreach(var line in lines)
+            {
+                var evt = new UpsEvent()
+                {
+                    Timestamp = DateTime.Parse(line.Substring(0, 25)),
+                    Message = line.Substring(27, (line.Length - 26) - 2)
+                };
+                events.Add(evt);
+            }
+
+            return events.ToArray();
         }
     }
 }
