@@ -19,8 +19,9 @@ Make sure your /etc/apcupsd/apcupsd.conf has the following set:
 Use the simple client in C#:
 
     var client = new ApcupsdClient("127.0.0.1", 3551);
-    client.Connect();
-    var resp = client.GetStatus();
+    var upsStatusResponse = client.GetStatus();
+    var upsEventsArray = client.GetEvents();
+    
     
     
 ### Bugs or suggestions?
