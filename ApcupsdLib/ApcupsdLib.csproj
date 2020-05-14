@@ -14,8 +14,4 @@
     <RepositoryUrl>https://github.com/patrickhampson/Apcupsd.NET</RepositoryUrl>
     <PackageTags>apc, ups, apcupsd, battery, backup</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Objects\" />
-  </ItemGroup>
 </Project>

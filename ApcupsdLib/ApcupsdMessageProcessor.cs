@@ -82,15 +82,22 @@ namespace ApcupsdLib
             
             foreach(var line in lines)
             {
-                var evt = new UpsEvent()
-                {
-                    Timestamp = DateTime.Parse(line.Substring(0, 25)),
-                    Message = line.Substring(27, (line.Length - 26) - 2)
-                };
+                var evt = this.ParseUpsEventMessage(line);
                 events.Add(evt);
             }
 
             return events.ToArray();
+        }
+
+        public UpsEvent ParseUpsEventMessage(string line)
+        {
+            var evt = new UpsEvent()
+            {
+                Timestamp = DateTime.Parse(line.Substring(0, 25)),
+                Message = line.Substring(27, (line.Length - 26) - 1)
+            };
+
+            return evt;
         }
     }
 }

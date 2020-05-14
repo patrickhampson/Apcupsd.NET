@@ -33,5 +33,26 @@ namespace ApcupsdLibTests
 
             Assert.AreEqual(100.0, status.BCharge.Value);
         }
+
+        [Test]
+        public void Test_ParseUpsEventMessages_FromFile()
+        {
+            var processor = new ApcupsdMessageProcessor();
+
+            var messages = File.ReadAllLines("TestData/apcupsd.events");
+            var events = processor.ParseUpsEventMessages(messages);
+            Assert.AreEqual(182, events.Length);
+            Assert.AreEqual(DateTime.Parse("2019-10-04 20:39:01 +0100"), events[0].Timestamp);
+            Assert.AreEqual("Communications with UPS lost.", events[0].Message);
+        }
+
+        [Test]
+        public void Test_ParseUpsEventMessage_FromString()
+        {
+            var processor = new ApcupsdMessageProcessor();
+            var evt = processor.ParseUpsEventMessage("2020-04-11 00:14:59 +0100  Power is back. UPS running on mains.");
+            Assert.AreEqual(DateTime.Parse("2020-04-11 00:14:59 +0100"), evt.Timestamp);
+            Assert.AreEqual("Power is back. UPS running on mains.", evt.Message);
+        }
     }
 }

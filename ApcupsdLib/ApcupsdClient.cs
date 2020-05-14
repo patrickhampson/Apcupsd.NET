@@ -19,14 +19,12 @@ namespace ApcupsdLib
 
         private string host;
         private int port;
-        private int readTimeout;
         private ApcupsdMessageProcessor messageProcessor;
 
-        public ApcupsdClient(string host, int port, int readTimeout = 1000)
+        public ApcupsdClient(string host, int port)
         {
             this.host = host;
             this.port = port;
-            this.readTimeout = readTimeout;
 
             this.messageProcessor = new ApcupsdMessageProcessor();
         }
@@ -43,6 +41,24 @@ namespace ApcupsdLib
             var arr = this.ExecuteClientAction(GetEventsMessage);
             var ret = this.messageProcessor.ParseUpsEventMessages(arr);
             return ret;
+        }
+
+        public UpsEvent[] GetEventsFromFile(string filePath = "/var/log/apcupsd.events")
+        {
+            var events = new List<UpsEvent>();
+
+            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                while (reader.Peek() >= 0)
+                {
+                    var line = reader.ReadLine();
+                    var evt = this.messageProcessor.ParseUpsEventMessage(line);
+                    events.Add(evt);
+                }
+            }
+
+            return events.ToArray();
         }
 
         private string[] ExecuteClientAction(byte[] sendMessage)

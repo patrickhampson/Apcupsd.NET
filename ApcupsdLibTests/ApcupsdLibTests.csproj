@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestData\apcupsd.events">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\TCPSocket.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
