@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using ApcupsdLib.Objects;
 
 namespace ApcupsdLib
@@ -32,9 +30,14 @@ namespace ApcupsdLib
             if (!string.IsNullOrWhiteSpace(statusStr))
             {
                 // it is possible to have multiple values for status "ONLINE REPLACEBATT"
-                TextInfo ti = new CultureInfo("en-US", false).TextInfo;
-                statusStr = ti.ToTitleCase(ti.ToLower(statusStr));
-                status = (Status)Enum.Parse(typeof(Status), statusStr.Replace(' ', ','));
+                Enum.TryParse(statusStr.Replace(' ', ','), true, out status);
+            }
+
+            var senseStr = dict.GetStringOrEmpty("SENSE");
+            var sense = Sense.Unknown;
+            if (!string.IsNullOrWhiteSpace(senseStr))
+            {
+                Enum.TryParse(senseStr, true, out sense);
             }
 
             var ret = new UpsStatus()
@@ -62,7 +65,7 @@ namespace ApcupsdLib
                 MaxTime = dict.GetNullableInt("MAXTIME"),
                 MaxLineV = dict.GetNullableDouble("MAXLINEV"),
                 OutputV = dict.GetNullableDouble("OUTPUTV"),
-                // todo: sense
+                Sense = sense,
                 LoTrans = dict.GetNullableDouble("LOTRANS"),
                 HiTrans = dict.GetNullableDouble("HITRANS"),
                 RetPct = dict.GetNullableDouble("RETPCT"),
