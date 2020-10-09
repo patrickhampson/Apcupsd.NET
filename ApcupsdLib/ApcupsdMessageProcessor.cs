@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ApcupsdLib.Objects;
@@ -26,6 +27,16 @@ namespace ApcupsdLib
                 }
             }
 
+            var statusStr = dict.GetStringOrEmpty("STATUS");
+            var status = Status.Unknown;
+            if (!string.IsNullOrWhiteSpace(statusStr))
+            {
+                // it is possible to have multiple values for status "ONLINE REPLACEBATT"
+                TextInfo ti = new CultureInfo("en-US", false).TextInfo;
+                statusStr = ti.ToTitleCase(ti.ToLower(statusStr));
+                status = (Status)Enum.Parse(typeof(Status), statusStr.Replace(' ', ','));
+            }
+
             var ret = new UpsStatus()
             {
                 Apc = dict.GetStringOrEmpty("APC"),
@@ -38,7 +49,7 @@ namespace ApcupsdLib
                 Model = dict.GetStringOrEmpty("MODEL"),
                 UpsMode = dict.GetStringOrEmpty("UPSMODE"),
                 StartTime = dict.GetDateTime("STARTTIME"),
-                // todo: Status = (Status)Enum.Parse(typeof(Status), dict.GetStringOrEmpty("STATUS")), // it is possible to have multiple values for status "ONLINE REPLACEBATT"
+                Status = status,
                 MasterUpd = dict.GetNullableDateTime("MASTERUPD"),
                 EndApc = dict.GetDateTime("END APC"),
 

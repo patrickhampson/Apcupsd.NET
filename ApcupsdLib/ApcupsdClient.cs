@@ -21,7 +21,7 @@ namespace ApcupsdLib
         private int port;
         private ApcupsdMessageProcessor messageProcessor;
 
-        public ApcupsdClient(string host, int port)
+        public ApcupsdClient(string host, int port = 3551)
         {
             this.host = host;
             this.port = port;
