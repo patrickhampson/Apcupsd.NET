@@ -5,10 +5,12 @@ namespace ApcupsdLib.Objects
     {
         public UpsEvent()
         {
+            this.EventType = EventType.Unknown;
         }
 
         public DateTime Timestamp;
         public string Message;
+        public EventType EventType;
 
         public override string ToString()
         {

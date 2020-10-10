@@ -7,6 +7,15 @@ namespace ApcupsdLib
 {
     public class ApcupsdMessageProcessor
     {
+        private static readonly Dictionary<string, EventType> EventTypeDictionary = new Dictionary<string, EventType>()
+        {
+            {"Communications with UPS lost.", EventType.CommLost },
+            {"Power failure.", EventType.PowerFailure },
+            {"Running on UPS batteries.", EventType.OnBatt },
+            // {"Mains returned. No longer on UPS batteries.", EventType.PowerRestore }, // Drop so we don't publish duplicate events.
+            {"Power is back. UPS running on mains.", EventType.PowerRestore },
+        };
+
         public ApcupsdMessageProcessor()
         {
         }
@@ -108,8 +117,13 @@ namespace ApcupsdLib
             var evt = new UpsEvent()
             {
                 Timestamp = DateTime.Parse(line.Substring(0, 25)),
-                Message = line.Substring(27, (line.Length - 26) - 1)
+                Message = line.Substring(27, (line.Length - 26) - 2)
             };
+
+            if (EventTypeDictionary.TryGetValue(evt.Message, out var eventType))
+            {
+                evt.EventType = eventType;
+            }
 
             return evt;
         }
