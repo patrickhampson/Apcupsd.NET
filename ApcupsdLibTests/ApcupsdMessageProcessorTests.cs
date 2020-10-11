@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using ApcupsdLib;
+using ApcupsdLib.Objects;
 using NUnit.Framework;
 
 namespace ApcupsdLibTests
@@ -44,6 +45,7 @@ namespace ApcupsdLibTests
             Assert.AreEqual(182, events.Length);
             Assert.AreEqual(DateTime.Parse("2019-10-04 20:39:01 +0100"), events[0].Timestamp);
             Assert.AreEqual("Communications with UPS lost.", events[0].Message);
+            Assert.AreEqual(EventType.CommLost, events[0].EventType);
         }
 
         [Test]
@@ -53,6 +55,7 @@ namespace ApcupsdLibTests
             var evt = processor.ParseUpsEventMessage("2020-04-11 00:14:59 +0100  Power is back. UPS running on mains.");
             Assert.AreEqual(DateTime.Parse("2020-04-11 00:14:59 +0100"), evt.Timestamp);
             Assert.AreEqual("Power is back. UPS running on mains.", evt.Message);
+            Assert.AreEqual(EventType.PowerRestore, evt.EventType);
         }
     }
 }

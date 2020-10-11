@@ -117,8 +117,8 @@ namespace ApcupsdLib
             var evt = new UpsEvent()
             {
                 Timestamp = DateTime.Parse(line.Substring(0, 25)),
-                Message = line.Substring(27, (line.Length - 26) - 2)
-            };
+                Message = line.Substring(27, (line.Length - 26) - 1).TrimEnd('\r', '\n')
+        };
 
             if (EventTypeDictionary.TryGetValue(evt.Message, out var eventType))
             {
