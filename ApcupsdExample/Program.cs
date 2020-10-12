@@ -10,7 +10,7 @@ namespace ApcupsdExample
     {
         static async Task Main(string[] args)
         {
-            var client = new ApcupsdClient("localhost", 3551);
+            var client = new ApcupsdClient("10.1.200.10");
 
             // Get status via NIS
             Console.WriteLine("UPS Status");
