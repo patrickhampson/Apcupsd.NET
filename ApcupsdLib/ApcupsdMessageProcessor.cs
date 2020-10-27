@@ -79,7 +79,7 @@ namespace ApcupsdLib
                 HiTrans = dict.GetNullableDouble("HITRANS"),
                 RetPct = dict.GetNullableDouble("RETPCT"),
                 ITemp = dict.GetNullableDouble("ITEMP"),
-                AlarmDel = dict.GetNullableInt("ALARMDEL"),
+                // AlarmDel = dict.GetNullableInt("ALARMDEL"),
                 BattV = dict.GetNullableDouble("BATTV"),
                 LineFreq = dict.GetNullableDouble("LINEFREQ"),
                 LastXfer = dict.GetStringOrEmpty("LASTXFER"),
