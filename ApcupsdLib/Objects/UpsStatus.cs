@@ -40,7 +40,7 @@ namespace ApcupsdLib.Objects
         public double? ITemp { get; set; }
         public int? AlarmDel { get; set; }
         public double? BattV { get; set; }
-        public int? LineFreq { get; set; }
+        public double? LineFreq { get; set; }
         public string LastXfer { get; set; }
         public int? NumXfers { get; set; }
         public int? TOnBatt { get; set; }

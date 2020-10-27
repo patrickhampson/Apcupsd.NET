@@ -81,7 +81,7 @@ namespace ApcupsdLib
                 ITemp = dict.GetNullableDouble("ITEMP"),
                 AlarmDel = dict.GetNullableInt("ALARMDEL"),
                 BattV = dict.GetNullableDouble("BATTV"),
-                LineFreq = dict.GetNullableInt("LINEFREQ"),
+                LineFreq = dict.GetNullableDouble("LINEFREQ"),
                 LastXfer = dict.GetStringOrEmpty("LASTXFER"),
                 NumXfers = dict.GetNullableInt("NUMXFERS"),
                 TOnBatt = dict.GetNullableInt("TOnBatt"),
