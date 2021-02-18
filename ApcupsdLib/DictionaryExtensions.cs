@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ApcupsdLib
 {
@@ -22,7 +23,9 @@ namespace ApcupsdLib
 
         public static double? GetNullableDouble(this Dictionary<string, string> dict, string key)
         {
-            return dict.ContainsKey(key) ? (double?)Double.Parse(dict[key].Split(' ')[0]) : null;
+            // We need to use CultureInfo.InvariantCulture to force . to be used as the decimal separator.
+            // In other regions like europe the parse would fail since the value from apcupsd uses . but in europe we use ,
+            return dict.ContainsKey(key) ? (double?)Double.Parse(dict[key].Split(' ')[0],NumberStyles.Any, CultureInfo.InvariantCulture) : null;
         }
 
         public static int? GetNullableInt(this Dictionary<string, string> dict, string key)
