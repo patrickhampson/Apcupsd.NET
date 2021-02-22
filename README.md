@@ -27,6 +27,7 @@ Use the simple client in C# to query NIS:
     var upsEventsArray = client.GetEvents();
     
 To subscribe to events from the apcupsd.events file:
+
     var listener = new ApcupsdEventListener();
     listener.UpsEventReceived += (sender, args) =>
     {
