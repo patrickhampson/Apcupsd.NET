@@ -6,6 +6,8 @@ namespace ApcupsdLib
 {
     internal static class DictionaryExtensions
     {
+        private static readonly CultureInfo USCulture = new CultureInfo("en-US");
+
         public static string GetStringOrEmpty(this Dictionary<string, string> dict, string key)
         {
             return dict.ContainsKey(key) ? dict[key] : string.Empty;
@@ -13,7 +15,7 @@ namespace ApcupsdLib
 
         public static DateTime? GetNullableDateTime(this Dictionary<string, string> dict, string key)
         {
-            return dict.ContainsKey(key) && dict[key] != "N/A" ? (DateTime?)DateTime.Parse(dict[key]) : null;
+            return dict.ContainsKey(key) && dict[key] != "N/A" ? (DateTime?)DateTime.Parse(dict[key], DictionaryExtensions.USCulture) : null;
         }
 
         public static DateTime GetDateTime(this Dictionary<string, string> dict, string key)
