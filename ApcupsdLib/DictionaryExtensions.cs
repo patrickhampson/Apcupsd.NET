@@ -13,7 +13,7 @@ namespace ApcupsdLib
 
         public static DateTime? GetNullableDateTime(this Dictionary<string, string> dict, string key)
         {
-            return dict.ContainsKey(key) && dict[key] != "N/A" ? (DateTime?)DateTime.Parse(dict[key]) : null;
+            return dict.ContainsKey(key) && dict[key] != "N/A" ? (DateTime?)DateTime.Parse(dict[key], CultureInfo.GetCultureInfo("en-US")) : null;
         }
 
         public static DateTime GetDateTime(this Dictionary<string, string> dict, string key)
