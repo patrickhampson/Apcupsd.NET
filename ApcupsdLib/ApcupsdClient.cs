@@ -82,7 +82,11 @@ namespace ApcupsdLib
                         ret.Add(lineStr);
                         stream.Read(start, 0, 2);
                     } while (!start.SequenceEqual(EndBytes));
+
+                    stream.Close();
                 }
+
+                client.Close();
             }
 
             return ret.ToArray();
